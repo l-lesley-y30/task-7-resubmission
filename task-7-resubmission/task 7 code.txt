@@ -1,0 +1,91 @@
+CREATE TABLE customers (
+customerID INT NOT NULL,
+customerName VARCHAR(100) NOT NULL,
+contactName VARCHAR(100) NOT NULL,
+country VARCHAR(100) NOT NULL,
+PRIMARY KEY (customerID)
+);
+
+CREATE TABLE orders (
+orderID INT NOT NULL,
+customerID INT NOT NULL,
+orderDate DATE NOT NULL,
+PRIMARY KEY (orderID),
+FOREIGN KEY (customerID) REFERENCES customers(customerID)
+);
+
+INSERT INTO customers 
+VALUES (1, 'Alfreds Futterkiste','Maria Anders','Germany');
+
+INSERT INTO customers
+VALUES (2,'Ana Trujillo Emparedados y helados', 'Ana Trujillo', 'Mexico');
+
+INSERT INTO customers
+VALUES (3,'Antonio Moreno Taqueria' , 'Antonio Moreno','Mexico');
+
+INSERT INTO orders
+VALUES (10308, 2,'1996-09-18');
+
+INSERT INTO orders
+VALUES (10309, 1,' 1996-09-19');
+
+INSERT INTO orders
+VALUES (10310 , 3 , '1996-09-20' );
+
+
+
+
+
+
+query 1
+
+SELECT*
+FROM customers
+INNER JOIN orders
+ON customers.customerID= orders.cusstomerID;
+
+query 2
+
+SELECT*
+FROM customers
+RIGHT JOIN orders
+ON customers. customerID= orders.customerID;
+
+query 3
+
+SELECT*
+FROM customers
+LEFT JOIN orders
+ON customers. customerID= orders.customerID;
+
+query 4
+
+SELECT*
+FROM customers
+RIGHT JOIN orders
+ON customers. customerID= orders.customerID
+WHERE customers.customerID IS NULL;
+
+query 5 
+
+SELECT*
+FROM customers
+LEFT JOIN orders
+ON customers. customerID= orders.customerID
+WHERE orders.orderID IS NULL;
+
+query 6
+
+SELECT*
+FROM customers
+FULL JOIN orders
+ON customers.customerID= orders.customerID;
+
+query 7
+
+SELECT*
+FROM customers
+FULL JOIN orders
+ON customers. customerID=orders.customerID
+WHERE customers. customerID IS NULL OR orders.customerID IS NULL;
+
